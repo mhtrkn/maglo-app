@@ -66,10 +66,10 @@ function SignUpPage() {
 
   return (
     <div className='w-full flex flex-row min-h-screen'>
-      <div className='w-full flex flex-col gap-[105px] py-10 pl-[135px] pr-[91px]'>
+      <div className='w-full flex flex-col gap-[105px] py-10 px-8 md:pl-[91px] lg:pl-[135px] md:pr-[91px]'>
         <Image src={'icons/maglo-logo.svg'} alt='maglo-logo' width={120} height={30} />
 
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col max-w-[404px] w-full items-start gap-[25px]'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col md:max-w-[404px] w-full items-start gap-[25px]'>
           <div>
             <h2 className='text-primary font-semibold text-3xl'>Create new account</h2>
             <span className='text-third text-base'>Welcome back! Please enter your details</span>
@@ -148,7 +148,7 @@ function SignUpPage() {
           </div>
         </form>
       </div>
-      <div className='min-w-[675px] w-full flex items-center relative justify-center h-screen'>
+      <div className='hidden max-w-[675px] w-full md:flex items-center relative justify-center h-screen'>
         <Image src={'/images/register-splash.png'} fill sizes='675/900' alt='register-splash' />
       </div>
     </div >
