@@ -21,9 +21,18 @@ export const authService = {
     Cookies.remove('token');
   },
 
-  register: async (data: RegisterRequest): Promise<RegisterResponse> => {
-    const res = await api.post('/users/register', data);
+  registerAndLogin: async (data: RegisterRequest) => {
+    await api.post('/users/register', data);
+    const loginRes = await api.post('/users/login', {
+      email: data.email,
+      password: data.password,
+    });
 
-    return res.data;
-  }
+    Cookies.set('token', loginRes?.data?.data?.accessToken, {
+      expires: 7,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    });
+    return loginRes.data;
+  },
 };

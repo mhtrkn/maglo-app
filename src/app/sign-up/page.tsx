@@ -46,17 +46,17 @@ function SignUpPage() {
     setLoading(true);
 
     try {
-      const res = await authService.register(data);
+      const res = await authService.registerAndLogin(data);
 
       if (res?.success) {
-        toast.success("Login Successful!", { description: "You are being redirected to your dashboard..." })
+        toast.success("User registered successfully!", { description: "You are being redirected to your dashboard..." })
         setTimeout(() => {
           router.push('/dashboard');
         }, 2000);
       }
     } catch (err) {
       toast.error("Login Failed!", {
-        description: "Email is already taken."
+        description: "User with that email already exists."
       })
       console.warn(err);
     } finally {
