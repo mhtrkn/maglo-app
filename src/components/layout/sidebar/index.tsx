@@ -4,7 +4,7 @@ import { sidebarBottomCategories, sidebarCategories } from '@/lib/mockdata'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -31,12 +31,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from '@/components/ui/textarea';
 import { authService } from '@/services/auth';
+import { ROUTES } from '@/routes';
 
 function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
 
-  const handleLogout = () => {
-    authService.logout();
+  const handleLogout = async () => {
+    await authService.logout();
+    router.push(ROUTES.SIGN_IN);
   }
   return (
     <div className='max-w-[250px] w-full flex flex-col items-start px-[25px] pt-[30px] pb-[100px] bg-gray1'>

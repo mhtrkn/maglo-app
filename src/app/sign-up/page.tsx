@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import { toast } from "sonner";
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/auth';
+import { ROUTES } from '@/routes';
 
 const schema = yup.object({
   fullName: yup
@@ -49,10 +50,8 @@ function SignUpPage() {
       const res = await authService.registerAndLogin(data);
 
       if (res?.success) {
-        toast.success("User registered successfully!", { description: "You are being redirected to your dashboard..." })
-        setTimeout(() => {
-          router.push('/dashboard');
-        }, 2000);
+        toast.success("User registered successfully!", { description: "You are being redirected to your dashboard" })
+        router.push(ROUTES.DASHBOARD);
       }
     } catch (err) {
       toast.error("Login Failed!", {

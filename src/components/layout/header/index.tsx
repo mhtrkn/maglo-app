@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger
 } from "@/components/ui/dialog"
 import {
@@ -52,7 +53,9 @@ function Header() {
             <Image className="cursor-pointer" src={'icons/search.svg'} alt="" width={24} height={24} />
           </DialogTrigger>
           <DialogContent className="min-h-80 flex flex-col">
-            <Label htmlFor="search" className="text-sm font-medium text-primary">Search</Label>
+            <DialogTitle>
+              <Label htmlFor="search" className="text-sm font-medium text-primary">Search</Label>
+            </DialogTitle>
             <Input id="search" name="search" type="search" placeholder="Search anything what you want.." className="-mt-2" />
             <Separator className="w-full mt-2" />
             <div>

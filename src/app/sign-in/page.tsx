@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import { toast } from "sonner";
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/auth';
+import { ROUTES } from '@/routes';
 
 const schema = yup.object({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -36,10 +37,8 @@ function SignInPage() {
       const res = await authService.login(data);
 
       if (res?.success) {
-        toast.success("Login Successful!", { description: "You are being redirected to your dashboard..." })
-        setTimeout(() => {
-          router.push('/dashboard');
-        }, 2000);
+        toast.success("Login Successful!", { description: "You are being redirected to your dashboard" })
+        router.push(ROUTES.DASHBOARD);
       }
     } catch (err) {
       toast.error("Login Failed!", {
