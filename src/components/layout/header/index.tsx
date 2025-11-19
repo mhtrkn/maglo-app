@@ -1,5 +1,6 @@
 "use client";
 
+import { NotificationIcon, SearchIcon } from "@/assets/icons";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -42,15 +43,15 @@ function Header() {
   const tabName = pathname.split('/').filter(Boolean).pop();
 
   return (
-    <div className='w-full flex flex-row items-center'>
+    <div className='w-full flex flex-row items-center max-w-[1110px]'>
       <h2 className='text-[25px] font-semibold text-primary capitalize'>
         {tabName}
       </h2>
 
       <div className='flex-1 w-full flex items-center justify-end gap-[45px]'>
         <Dialog>
-          <DialogTrigger>
-            <Image className="cursor-pointer" src={'icons/search.svg'} alt="" width={24} height={24} />
+          <DialogTrigger className="cursor-pointer">
+            <SearchIcon />
           </DialogTrigger>
           <DialogContent className="min-h-80 flex flex-col">
             <DialogTitle>
@@ -74,14 +75,14 @@ function Header() {
         </Dialog>
 
         <Popover>
-          <PopoverTrigger asChild>
-            <Image className="cursor-pointer" src={'icons/notification.svg'} alt="" width={24} height={24} />
+          <PopoverTrigger asChild className="cursor-pointer">
+            <NotificationIcon />
           </PopoverTrigger>
           <PopoverContent className="w-80 absolute -right-5 p-0">
             <Empty className="from-muted/50 to-background h-full bg-linear-to-b from-30%">
               <EmptyHeader>
                 <EmptyMedia variant="icon">
-                  <Image src={'icons/notification.svg'} alt="" width={24} height={24} />
+                  <NotificationIcon />
                 </EmptyMedia>
                 <EmptyTitle>No Notifications</EmptyTitle>
                 <EmptyDescription>

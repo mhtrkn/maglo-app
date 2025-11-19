@@ -1,10 +1,6 @@
 'use client';
 
-import { sidebarBottomCategories, sidebarCategories } from '@/lib/mockdata'
-import clsx from 'clsx'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { HelpIcon, LogoutIcon, MagloIcon } from '@/assets/icons';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,8 +11,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -26,12 +22,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from '@/components/ui/textarea';
-import { authService } from '@/services/auth';
+import { sidebarCategories } from '@/lib/mockdata';
 import { ROUTES } from '@/routes';
+import { authService } from '@/services/auth';
+import clsx from 'clsx';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
 function Sidebar() {
   const pathname = usePathname();
@@ -43,7 +43,7 @@ function Sidebar() {
   }
   return (
     <div className='max-w-[250px] w-full flex flex-col items-start px-[25px] pt-[30px] pb-[100px] bg-gray1'>
-      <Image src={"icons/maglo-logo.svg"} alt='maglo-logo' width={120} height={30} />
+      <MagloIcon />
 
       <ul className='mt-10 flex h-full flex-col gap-0.5 w-full'>
         {sidebarCategories.map((item) => {
@@ -67,7 +67,7 @@ function Sidebar() {
         <form className='w-full'>
           <DialogTrigger asChild>
             <Button variant="ghost" className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
-              <Image src='icons/help.svg' alt="help" width={20} height={20} />
+              <HelpIcon />
               Help
             </Button>
           </DialogTrigger>
@@ -101,7 +101,7 @@ function Sidebar() {
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="ghost" className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
-            <Image src='icons/logout.svg' alt="logout" width={20} height={20} />
+            <LogoutIcon />
             Logout
           </Button>
         </AlertDialogTrigger>
