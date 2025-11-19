@@ -43,3 +43,7 @@ export interface RegisterResponse {
   message: string;
   data: RegisterResponseData;
 }
+
+export interface RefreshTokenResponse {
+  accessToken: string;
+}
