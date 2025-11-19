@@ -1,11 +1,16 @@
+"use client";
+
+import { useUserData } from '@/hooks/useUserData';
 import FinancialSummary from './components/financial-summary';
 import MyWalletView from './components/my-wallet';
 import RecentTransactions from './components/recent-transactions';
 import ScheduledTransfers from './components/scheduled-transfers';
 import WorkingCapital from './components/working-capital';
+import { useFinancialData } from '@/hooks/useFinancialData';
 
-function DashboardView({ ...props }) {
-  console.log('datdat: ', props);
+function DashboardView() {
+  const { data } = useFinancialData();
+  const { user } = useUserData();
 
   return (
     <div className='flex gap-[39px]'>

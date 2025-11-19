@@ -66,10 +66,10 @@ function Sidebar() {
       <Dialog>
         <form className='w-full'>
           <DialogTrigger asChild>
-            <Button variant="ghost" className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
+            <div className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
               <HelpIcon />
               Help
-            </Button>
+            </div>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -90,7 +90,7 @@ function Sidebar() {
             </div>
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button asChild variant="outline">Cancel</Button>
               </DialogClose>
               <Button type="submit">Submit</Button>
             </DialogFooter>
@@ -100,10 +100,10 @@ function Sidebar() {
 
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="ghost" className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
+          <div className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
             <LogoutIcon />
             Logout
-          </Button>
+          </div>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>

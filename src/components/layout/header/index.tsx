@@ -101,13 +101,13 @@ function Header() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="flex items-center justify-center gap-7 bg-gray1 py-1.5 h-full pl-[7px] pr-[15px] rounded-full">
+            <div className="flex items-center justify-center gap-7 bg-gray1 py-1.5 h-full pl-[7px] pr-[15px] rounded-full">
               <div className="flex items-center gap-3">
                 <Image src={"/images/profile-photo.png"} alt="" width={36} height={36} />
                 <span className="font-semibold text-sm text-primary">Mahfuzul Nabil</span>
               </div>
               <Image src={"icons/dropdown.svg"} width={17} height={17} alt="" />
-            </Button>
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="start">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
