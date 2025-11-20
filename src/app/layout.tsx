@@ -1,6 +1,7 @@
 import { Kumbh_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner"
 import "./globals.css";
+import LottieLoader from "@/components/layout/loader";
 
 const kumbh = Kumbh_Sans({
   subsets: ["latin"],
@@ -18,8 +19,8 @@ export default function RootLayout({
     <html lang="en" className={kumbh.variable}>
       <body>
         {children}
+        <LottieLoader />
         <Toaster position="top-right" richColors theme="light" />
-
       </body>
     </html>
   );

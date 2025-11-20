@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { financialService } from "@/services/financial";
 import {
   FinancialSummary,
@@ -9,6 +9,7 @@ import {
   RecentTransactionsResponse,
   ScheduledTransfersResponse,
 } from "@/types/financial";
+import { useLoadingStore } from "@/store/useLoadingStore";
 
 interface FinancialData {
   summary: FinancialSummary | null;
@@ -26,6 +27,7 @@ interface UseFinancialDataReturn {
 }
 
 export const useFinancialData = (): UseFinancialDataReturn => {
+  const { show, hide } = useLoadingStore();
   const [data, setData] = useState<FinancialData>({
     summary: null,
     workingCapital: null,
@@ -37,9 +39,10 @@ export const useFinancialData = (): UseFinancialDataReturn => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
+    show();
 
     try {
       const [
@@ -68,12 +71,15 @@ export const useFinancialData = (): UseFinancialDataReturn => {
       setError("Failed to fetch financial data");
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        hide();
+      }, 300)
     }
-  };
+  }, [show, hide]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return { data, loading, error, refresh: fetchData };
 };

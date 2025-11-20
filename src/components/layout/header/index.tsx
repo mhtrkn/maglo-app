@@ -103,7 +103,7 @@ function Header() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="flex items-center justify-center gap-1 md:gap-3 md:gap-7 bg-gray1 py-1.5 h-full px-2 md:pl-[7px] md:pr-[15px] rounded-full">
+            <div className="flex items-center justify-center gap-1 md:gap-7 bg-gray1 py-1.5 h-full px-2 md:pl-[7px] md:pr-[15px] rounded-full">
               <div className="flex items-center gap-0 md:gap-3">
                 <Image src={"/images/profile-photo.png"} alt="" width={36} height={36} />
                 <span className="font-semibold text-xs md:text-sm text-primary">

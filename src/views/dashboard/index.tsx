@@ -9,7 +9,6 @@ import WorkingCapital from './components/working-capital';
 
 function DashboardView() {
   const { data } = useFinancialData();
-  console.log('datdat firstData: ', data);
 
   return (
     <div className='flex max-xl:flex-wrap flex-col md:flex-row gap-[30px] md:gap-[39px]'>

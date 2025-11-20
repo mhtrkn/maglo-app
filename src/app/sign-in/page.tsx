@@ -52,7 +52,7 @@ function SignInPage() {
 
   return (
     <div className='w-full flex flex-row min-h-screen'>
-      <div className='w-full flex flex-col gap-[157.5px] py-10 px-8 md:pl-[91px] lg:pl-[135px] md:pr-[91px] items-start 2xl:items-center'>
+      <div className='w-full flex flex-col gap-[157.5px] py-10 px-8 md:pl-[91px] lg:pl-[135px] md:pr-[91px] items-start'>
         <Image src={'icons/maglo-logo.svg'} alt='maglo-logo' width={120} height={30} />
 
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col md:max-w-[404px] w-full items-start gap-[25px]'>
