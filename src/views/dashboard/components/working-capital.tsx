@@ -2,6 +2,7 @@
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Skeleton } from '@/components/ui/skeleton';
 import { WorkingCapitalResponse } from '@/types/financial';
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 
@@ -30,12 +31,22 @@ function WorkingCapital({ data }: {
     },
   } satisfies ChartConfig;
 
-  if (!data) return null;
+  if (!data) return (
+    <div className="[@media(min-width:1440px)]:max-w-[716px] md:min-h-[310px] w-full border border-gray3 rounded-[10px] py-2 px-3 md:pl-[25px] md:pt-[15px] md:pr-[19px] md:pb-[21px]">
+      <div className='flex max-md:flex-wrap items-center justify-between mb-5 md:mb-9'>
+        <Skeleton className='rounded-full h-6 w-32' />
+        <div className='flex items-center max-md:w-full max-md:justify-between gap-1 md:gap-[72px] max-md:flex-wrap'>
+          <Skeleton className='w-[225px] h-4 rounded-full' />
+          <Skeleton className='w-[115px] h-9 rounded-full' />
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="[@media(min-width:1440px)]:max-w-[716px] w-full border border-gray3 rounded-[10px] py-2 px-3 md:pl-[25px] md:pt-[15px] md:pr-[19px] md:pb-[21px]">
       <div className='flex max-md:flex-wrap items-center justify-between mb-5 md:mb-9'>
-        <span className='flex-1 font-semibold text-base text-primary'>Working Capital</span>
+        <span className='flex-1 font-semibold text-lg text-primary'>Working Capital</span>
 
         <div className='flex items-center max-md:w-full max-md:justify-between gap-1 md:gap-[72px] max-md:flex-wrap'>
           <div className='flex items-center gap-5 md:gap-[30px]'>

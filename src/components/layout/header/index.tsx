@@ -34,6 +34,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton";
 import { useUserData } from "@/hooks/useUserData";
 import { RefreshCcwIcon } from "lucide-react"
 import Image from "next/image"
@@ -43,6 +44,22 @@ function Header() {
   const pathname = usePathname();
   const tabName = pathname.split('/').filter(Boolean).pop();
   const { user } = useUserData();
+
+  if (!user) {
+    return (
+      <div className='w-full flex flex-row items-center'>
+        <h2 className='text-base md:text-[25px] font-semibold text-primary capitalize'>
+          {tabName}
+        </h2>
+
+        <div className='flex-1 w-full flex items-center justify-end gap-2 md:gap-[45px]'>
+          <Skeleton className="w-8 h-8 rounded-full" />
+          <Skeleton className="w-8 h-8 rounded-full" />
+          <Skeleton className="w-[220px] h-12 rounded-full" />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className='w-full flex flex-row items-center'>

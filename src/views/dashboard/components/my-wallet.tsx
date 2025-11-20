@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import { formatExpiryDate } from "@/lib/utils";
 import { WalletResponse } from "@/types/financial";
 import Image from 'next/image';
@@ -16,6 +17,44 @@ import Image from 'next/image';
 function MyWalletView({ data }: {
   data: WalletResponse | null
 }) {
+
+  if (!data) {
+    return (
+      <div className="flex flex-col max-w-[354px] min-w-[354px] w-full mx-auto">
+        <div className='max-w-[354px] w-full flex items-center justify-between mb-[15px]'>
+          <Skeleton className="rounded-full w-15 h-6" />
+        </div>
+
+        <div className='flex flex-col items-center w-full'>
+          <div className='max-w-[354px] w-full h-[210px] rounded-[15px] relative bg-[linear-gradient(104.3deg,#4A4A49_2.66%,#20201F_90.57%)] py-[18px] px-[30px]'>
+            <div className='w-full flex flex-col gap-[27px] mb-[21px]'>
+              <Skeleton className="w-36 h-6 rounded-full" />
+              <div className='w-full flex items-center justify-between'>
+                <Image src={'icons/chip.svg'} alt='chip' width={38} height={30} />
+                <Image src={'icons/wifi.svg'} alt='wifi' width={33} height={34} className="w-[33px] h-[34px]" />
+              </div>
+            </div>
+            <Skeleton className="w-48 h-5 rounded-full" />
+          </div>
+
+          <div className='border border-white/40 rounded-[15px] max-w-[324px] w-full h-[172px] pl-5 pb-5 pt-[15px] -mt-15 relative z-10 backdrop-blur-xs pr-3.5 bg-linear-to-br from-white/10 to-[#f1f2ed]'>
+            <div className='w-full flex flex-col gap-[13px] mb-[21px]'>
+              <Skeleton className="rounded-full w-48 h-6" />
+              <div className='w-full flex items-center justify-between'>
+                <Image src={'icons/chip.svg'} alt='' width={30} height={24} />
+                <Image src={'icons/wifi.svg'} alt='' width={33} height={34} className="w-[33px] h-[34px]" />
+              </div>
+            </div>
+            <Skeleton className="w-8 h-5 rounded" />
+            <div className='flex flex-col gap-[5px]'>
+              <Skeleton className="w-48 h-5 rounded-full" />
+              <Skeleton className="w-8 h-4 rounded-lg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="flex flex-col max-w-[354px] min-w-[354px] w-full mx-auto">
       <div className='max-w-[354px] w-full flex items-center justify-between mb-[15px]'>

@@ -2,11 +2,54 @@
 
 import { formatCurrency } from '@/lib/utils';
 import { FinancialSummary } from '@/types/financial';
+import { Skeleton } from "@/components/ui/skeleton";
 import Image from 'next/image'
 
 function FinancialSummaryView({ data }: {
   data: FinancialSummary | null
 }) {
+
+  if (!data) {
+    return (
+      <div className='flex items-center gap-2 md:gap-[25px] max-md:justify-between max-md:w-full overflow-auto'>
+        <div className='max-md:flex-1 bg-[#363A3F] px-2 py-4 md:px-5 md:py-6 flex-center rounded-[10px]'>
+          <div className='flex-center gap-2 md:gap-[15px]'>
+            <div className='flex-center h-8 w-8 md:h-[42px] md:w-[42px] bg-[#4E5257] rounded-full'>
+              <Image src={"icons/fill-wallet.svg"} alt='' width={20} height={20} />
+            </div>
+            <div className='flex flex-col justify-center items-start gap-0 md:gap-2.5'>
+              <Skeleton className="h-5 w-[85px] rounded-full" />
+              <Skeleton className="h-8 w-[125px] rounded-full" />
+            </div>
+          </div>
+        </div>
+        <div className='max-md:flex-1 bg-gray2 px-2 py-4 md:px-5 md:py-6 flex-center rounded-[10px]'>
+          <div className='flex-center gap-2 md:gap-[15px]'>
+            <div className='flex-center h-8 w-8 md:h-[42px] md:w-[42px] bg-[#EBE8E8] rounded-full'>
+              <Image src={"icons/wallet.svg"} alt='' width={20} height={20} />
+            </div>
+            <div className='flex flex-col justify-center items-start gap-0 md:gap-2.5'>
+              <Skeleton className="h-5 w-[85px] rounded-full" />
+              <Skeleton className="h-8 w-[125px] rounded-full" />
+            </div>
+          </div>
+        </div>
+
+        <div className='max-md:flex-1 bg-gray2 px-2 py-4 md:px-5 md:py-6 flex-center rounded-[10px]'>
+          <div className='flex-center gap-2 md:gap-[15px]'>
+            <div className='flex-center h-8 w-8 md:h-[42px] md:w-[42px] bg-[#EBE8E8] rounded-full'>
+              <Image src={"icons/wallet.svg"} alt='' width={20} height={20} />
+            </div>
+            <div className='flex flex-col justify-center items-start gap-0 md:gap-2.5'>
+              <Skeleton className="h-5 w-[85px] rounded-full" />
+              <Skeleton className="h-8 w-[125px] rounded-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='flex items-center gap-2 md:gap-[25px] max-md:justify-between max-md:w-full overflow-auto'>
       <div className='max-md:flex-1 bg-[#363A3F] px-2 py-4 md:px-5 md:py-6 flex-center rounded-[10px]'>

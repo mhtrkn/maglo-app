@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { ROUTES } from '@/routes';
 import { ScheduledTransfersResponse } from '@/types/financial';
@@ -14,6 +15,32 @@ function ScheduledTransfers({ data }: {
 
   const handleRoute = () => {
     router.push(`${ROUTES.TRANSACTIONS}`);
+  }
+
+  if (!data) {
+    return (
+      <div className='mt-[30px] flex flex-col gap-[25px] w-full max-md:pr-3'>
+        <div className='flex items-center justify-between w-full h-5'>
+          <Skeleton className='h-6 w-36 rounded-full' />
+          <Skeleton className='w-20 h-4 rounded-full' />
+        </div>
+
+        <div className='flex flex-col gap-3'>
+          {[...Array(5)].map((_, id) => (
+            <div key={id} className='flex items-center justify-between w-full pb-[15px] border-b border-gray1'>
+              <div className='flex items-center gap-[15px]'>
+                <Skeleton className='w-7 h-7 rounded-full' />
+                <div className='flex flex-col gap-[7px]'>
+                  <Skeleton className='w-32 h-4 rounded-full' />
+                  <Skeleton className='w-40 h-3 rounded-full' />
+                </div>
+              </div>
+              <Skeleton className='w-20 h-6 rounded-full' />
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   }
 
   return (
