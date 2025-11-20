@@ -45,7 +45,7 @@ function Header() {
   const { user } = useUserData();
 
   return (
-    <div className='w-full flex flex-row items-center md:max-w-[1110px]'>
+    <div className='w-full flex flex-row items-center'>
       <h2 className='text-base md:text-[25px] font-semibold text-primary capitalize'>
         {tabName}
       </h2>

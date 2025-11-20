@@ -12,14 +12,14 @@ function DashboardView() {
   console.log('datdat firstData: ', data);
 
   return (
-    <div className='flex flex-col md:flex-row gap-[30px] md:gap-[39px]'>
+    <div className='flex max-xl:flex-wrap flex-col md:flex-row gap-[30px] md:gap-[39px]'>
       <div className='w-full md:w-fit flex flex-col gap-[30px]'>
         <FinancialSummaryView data={data?.summary} />
         <WorkingCapital data={data?.workingCapital} />
         <RecentTransactions data={data?.recentTransactions} />
       </div>
 
-      <div className='flex flex-col w-full md:max-w-[354px] max-md:items-center'>
+      <div className='flex flex-col flex-wrap w-full max-md:items-center md:w-full max-w-[716px]'>
         <MyWalletView data={data?.wallet} />
         <ScheduledTransfers data={data?.scheduledTransfers} />
       </div>

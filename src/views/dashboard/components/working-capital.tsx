@@ -33,7 +33,7 @@ function WorkingCapital({ data }: {
   if (!data) return null;
 
   return (
-    <div className="max-w-[716px] w-full border border-gray3 rounded-[10px] py-2 px-3 md:pl-[25px] md:pt-[15px] md:pr-[19px] md:pb-[21px]">
+    <div className="[@media(min-width:1440px)]:max-w-[716px] w-full border border-gray3 rounded-[10px] py-2 px-3 md:pl-[25px] md:pt-[15px] md:pr-[19px] md:pb-[21px]">
       <div className='flex max-md:flex-wrap items-center justify-between mb-5 md:mb-9'>
         <span className='flex-1 font-semibold text-base text-primary'>Working Capital</span>
 

@@ -17,7 +17,7 @@ function ScheduledTransfers({ data }: {
   }
 
   return (
-    <div className='mt-[30px] flex flex-col gap-[25px] w-full'>
+    <div className='mt-[30px] flex flex-col gap-[25px] w-full max-md:pr-3'>
       <div className='flex items-center justify-between w-full h-5'>
         <span className='font-semibold text-base md:text-lg text-primary'>Scheduled Transfers</span>
         <Button onClick={handleRoute} variant="ghost" className='text-secondary-color font-semibold text-xs md:text-sm flex items-center gap-0 md:gap-1.5 p-0 hover:bg-white hover:text-secondary-color cursor-pointer'>
@@ -29,7 +29,7 @@ function ScheduledTransfers({ data }: {
       <div className='flex flex-col gap-3'>
         {
           data && data?.transfers?.length > 0 && data?.transfers?.slice(0, 5)?.map((item) => (
-            <div key={item?.id} className='flex items-center justify-between md:max-w-[354px] w-full pb-[15px] border-b border-gray1'>
+            <div key={item?.id} className='flex items-center justify-between w-full pb-[15px] border-b border-gray1'>
               <div className='flex items-center gap-[15px]'>
                 <div className='w-7 h-7 md:w-[33px] md:h-[33px] flex-center overflow-hidden rounded-full'>
                   <Image src={item?.image} alt='Avatar' width={33} height={33} unoptimized />

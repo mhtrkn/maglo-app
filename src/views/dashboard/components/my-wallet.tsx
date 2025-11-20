@@ -17,7 +17,7 @@ function MyWalletView({ data }: {
   data: WalletResponse | null
 }) {
   return (
-    <div className="flex flex-col max-w-[354px] w-full">
+    <div className="flex flex-col max-w-[354px] min-w-[354px] w-full mx-auto">
       <div className='max-w-[354px] w-full flex items-center justify-between mb-[15px]'>
         <span className='font-semibold text-base md:text-lg text-primary'>Wallet</span>
         <DropdownMenu>
