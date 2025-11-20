@@ -9,11 +9,15 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { formatCurrency, formatDate } from '@/lib/utils';
 import { ROUTES } from '@/routes';
+import { RecentTransactionsResponse } from '@/types/financial';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-function RecentTransactions() {
+function RecentTransactions({ data }: {
+  data: RecentTransactionsResponse | null
+}) {
   const router = useRouter();
 
   const handleRoute = () => {
@@ -21,10 +25,10 @@ function RecentTransactions() {
   }
 
   return (
-    <div className="w-[716px] h-[291px] border border-gray3 rounded-[10px] pl-[25px] py-5 pr-[19px] flex flex-col gap-5">
+    <div className="md:max-w-[716px] w-full md:min-h-[295px] h-fit border border-gray3 rounded-[10px] px-3 py-2 md:pl-[25px] md:py-5 md:pr-[19px] flex flex-col gap-2 md:gap-5">
       <div className='flex items-center justify-between w-full h-5'>
-        <span className='font-semibold text-lg text-primary'>Recent Transaction</span>
-        <Button onClick={handleRoute} variant="ghost" className='text-secondary-color font-semibold text-sm flex items-center gap-1.5 p-0 hover:bg-white hover:text-secondary-color cursor-pointer'>
+        <span className='flex-1 font-semibold text-base text-primary'>Recent Transaction</span>
+        <Button onClick={handleRoute} variant="ghost" className='text-secondary-color font-semibold text-xs md:text-sm flex items-center gap-0 md:gap-1.5 p-0 hover:bg-white hover:text-secondary-color cursor-pointer'>
           View All
           <Image src={'icons/expand.svg'} alt='' width={18} height={18} />
         </Button>
@@ -40,22 +44,26 @@ function RecentTransactions() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className='pl-0'>
-              <div className='flex items-center gap-3.5'>
-                <div className='w-10 h-10 rounded-[5px] bg-gray1 overflow-hidden flex-center'>
-                  <Image src={"/images/netflix.png"} alt='' width={40} height={40} />
-                </div>
-                <div className='flex flex-col gap-[5px]'>
-                  <span className='font-medium text-sm text-primary'>Netflix Subscription</span>
-                  <span className='text-xs text-secondary'>Netflix</span>
-                </div>
-              </div>
-            </TableCell>
-            <TableCell className='text-sm font-medium text-secondary text-center'>Entertainment</TableCell>
-            <TableCell className='text-sm font-semibold text-primary text-center'>$100.00</TableCell>
-            <TableCell className='text-sm font-medium text-secondary text-center'>05 Apr 2022</TableCell>
-          </TableRow>
+          {
+            data && data?.transactions?.slice(0, 3)?.map((item) => (
+              <TableRow key={item?.id}>
+                <TableCell className='pl-0'>
+                  <div className='flex items-center gap-2 md:gap-3.5'>
+                    <div className='w-7 h-7 md:w-10 md:h-10 rounded-[5px] bg-gray1 overflow-hidden flex-center'>
+                      <Image src={item?.image} alt='' width={40} height={40} className='w-7 h-7 md:w-10 md:h-10 object-cover' />
+                    </div>
+                    <div className='flex flex-col gap-[5px]'>
+                      <span className='font-medium text-xs md:text-sm text-primary'>{item?.name}</span>
+                      <span className='text-[10px] md:text-sm text-secondary'>{item?.business}</span>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell className='text-xs md:text-sm font-medium text-secondary text-center'>{item?.type}</TableCell>
+                <TableCell className='text-xs md:text-sm font-semibold text-primary text-center'>{formatCurrency(item?.amount, item?.currency)}</TableCell>
+                <TableCell className='text-xs md:text-sm font-medium text-secondary text-center'>{formatDate(item?.date)}</TableCell>
+              </TableRow>
+            ))
+          }
         </TableBody>
       </Table>
     </div>

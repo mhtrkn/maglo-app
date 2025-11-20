@@ -3,6 +3,8 @@ export interface FinancialChange {
   trend: "up" | "down" | "stable";
 }
 
+export type CurrencyType = "USD" | "TRY" | "EUR" | "GBP";
+
 export interface FinancialItem {
   amount: number;
   currency: string;

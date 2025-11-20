@@ -1,4 +1,8 @@
 export interface UserProfile {
+  data: UserProfileData
+}
+
+export interface UserProfileData {
   id: string;
   fullName: string;
   email: string;

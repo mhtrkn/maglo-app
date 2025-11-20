@@ -42,21 +42,25 @@ function Sidebar() {
     router.push(ROUTES.SIGN_IN);
   }
   return (
-    <div className='max-w-[250px] w-full flex flex-col items-start px-[25px] pt-[30px] pb-[100px] bg-gray1'>
-      <MagloIcon />
+    <div className='max-w-[250px] w-fit md:w-full flex flex-col items-center md:items-start px-1 md:px-[25px] pt-3 md:pt-[30px] md:pb-[100px] bg-gray1'>
+      <span className='hidden md:block'>
+        <MagloIcon />
+      </span>
 
-      <ul className='mt-10 flex h-full flex-col gap-0.5 w-full'>
+      <ul className='md:mt-10 flex h-full flex-col gap-3 md:gap-0.5 w-fit md:w-full'>
         {sidebarCategories.map((item) => {
           const activeTab = pathname === item?.url;
 
           return (
             <li key={item?.id}>
               <Link className={clsx(
-                'max-w-[200px] w-full flex items-center justify-start gap-3 font-semibold text-sm rounded-xl py-3.5 px-[15px] hover:text-primary hover:bg-gray3',
-                activeTab ? 'bg-primary-color text-primary' : 'text-secondary font-medium'
+                'max-w-[200px] w-fit md:w-full flex items-center justify-start gap-3 text-sm rounded-full md:rounded-xl p-2 md:py-3.5 md:px-[15px] hover:text-primary hover:bg-gray3',
+                activeTab ? 'bg-primary-color font-semibold text-primary' : 'text-secondary font-medium'
               )} href={item?.url}>
                 <item.icon width={20} height={20} fill={activeTab ? '#1B212D' : '#929EAE'} />
-                {item?.name}
+                <span className='hidden md:block'>
+                  {item?.name}
+                </span>
               </Link>
             </li>
           )
@@ -64,11 +68,13 @@ function Sidebar() {
       </ul>
 
       <Dialog>
-        <form className='w-full'>
+        <form className='w-fit md:w-full'>
           <DialogTrigger asChild>
-            <div className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
+            <div className='md:h-12 cursor-pointer max-w-[200px] w-fit md:w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl p-2.5 md:py-3.5 md:px-[15px]'>
               <HelpIcon />
-              Help
+              <span className='hidden md:block'>
+                Help
+              </span>
             </div>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
@@ -100,9 +106,9 @@ function Sidebar() {
 
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <div className='h-12 cursor-pointer max-w-[200px] w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl py-3.5 px-[15px]'>
+          <div className='md:h-12 cursor-pointer max-w-[200px] w-fit md:w-full flex text-secondary font-medium items-center justify-start gap-3 text-sm rounded-xl p-2.5 md:py-3.5 md:px-[15px]'>
             <LogoutIcon />
-            Logout
+            <span className='hidden md:block'>Logout</span>
           </div>
         </AlertDialogTrigger>
         <AlertDialogContent>

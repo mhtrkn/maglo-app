@@ -2,52 +2,64 @@
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { WorkingCapitalResponse } from '@/types/financial';
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 
-function WorkingCapital() {
-  const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-  ]
+function WorkingCapital({ data }: {
+  data: WorkingCapitalResponse | null
+}) {
+  const chartData = data?.data.map((item) => ({
+    month: item?.month,
+    income: item?.income,
+    expense: item?.expense,
+    net: item?.net
+  }));
+
   const chartConfig = {
-    desktop: {
-      label: "Desktop",
+    income: {
+      label: "Income",
       color: "var(--color-primary-color)",
     },
-    mobile: {
-      label: "Mobile",
+    expense: {
+      label: "Expenses",
       color: "var(--color-secondary-color)",
     },
-  } satisfies ChartConfig
+    net: {
+      label: "Net",
+      color: "var(--color-accent-color)",
+    },
+  } satisfies ChartConfig;
+
+  if (!data) return null;
 
   return (
-    <div className="w-[716px] border border-gray3 rounded-[10px] pl-[25px] pt-[15px] pr-[19px] pb-[21px]">
-      <div className='flex items-center justify-between mb-9'>
-        <span className='flex-1 font-semibold text-lg text-primary'>Working Capital</span>
+    <div className="max-w-[716px] w-full border border-gray3 rounded-[10px] py-2 px-3 md:pl-[25px] md:pt-[15px] md:pr-[19px] md:pb-[21px]">
+      <div className='flex max-md:flex-wrap items-center justify-between mb-5 md:mb-9'>
+        <span className='flex-1 font-semibold text-base text-primary'>Working Capital</span>
 
-        <div className='flex items-center gap-[72px]'>
-          <div className='flex items-center gap-[30px]'>
-            <div className='flex items-center gap-[9px]'>
+        <div className='flex items-center max-md:w-full max-md:justify-between gap-1 md:gap-[72px] max-md:flex-wrap'>
+          <div className='flex items-center gap-5 md:gap-[30px]'>
+            <div className='flex items-center gap-1 md:gap-[9px]'>
               <div className='bg-secondary-color w-2 h-2 rounded-full' />
               <span className='text-primary text-xs'>Income</span>
             </div>
-            <div className='flex items-center gap-[9px]'>
+            <div className='flex items-center gap-1 md:gap-[9px]'>
               <div className='bg-primary-color w-2 h-2 rounded-full' />
               <span className='text-primary text-xs'>Expenses</span>
             </div>
+            <div className='flex items-center gap-1 md:gap-[9px]'>
+              <div className='bg-accent-color w-2 h-2 rounded-full' />
+              <span className='text-primary text-xs'>Net</span>
+            </div>
           </div>
           <Select>
-            <SelectTrigger className="w-28 text-xs text-primary border-none bg-gray2">
-              <SelectValue placeholder="Last 7 days" />
+            <SelectTrigger className="md:min-w-28 w-fit text-xs max-md:px-2 max-md:py-0 text-primary border-none bg-gray2">
+              <SelectValue placeholder={data?.period} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="week" className='text-xs text-primary'>Last 7 days</SelectItem>
-              <SelectItem value="month" className='text-xs text-primary'>Last 1 month</SelectItem>
-              <SelectItem value="year" className='text-xs text-primary'>Last 1 year</SelectItem>
+              <SelectItem value={data?.period || ""} className='text-xs text-primary'>
+                {data?.period}
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -71,16 +83,23 @@ function WorkingCapital() {
           />
           <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <Line
-            dataKey="desktop"
+            dataKey="income"
             type="monotone"
-            stroke="var(--color-desktop)"
+            stroke={chartConfig.income.color}
             strokeWidth={2}
             dot={false}
           />
           <Line
-            dataKey="mobile"
+            dataKey="expense"
             type="monotone"
-            stroke="var(--color-mobile)"
+            stroke={chartConfig.expense.color}
+            strokeWidth={2}
+            dot={false}
+          />
+          <Line
+            dataKey="net"
+            type="monotone"
+            stroke={chartConfig.net.color}
             strokeWidth={2}
             dot={false}
           />

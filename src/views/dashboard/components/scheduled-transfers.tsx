@@ -1,11 +1,15 @@
 "use client";
 
 import { Button } from '@/components/ui/button';
+import { formatCurrency, formatDate } from '@/lib/utils';
 import { ROUTES } from '@/routes';
+import { ScheduledTransfersResponse } from '@/types/financial';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-function ScheduledTransfers() {
+function ScheduledTransfers({ data }: {
+  data: ScheduledTransfersResponse | null
+}) {
   const router = useRouter();
 
   const handleRoute = () => {
@@ -15,78 +19,30 @@ function ScheduledTransfers() {
   return (
     <div className='mt-[30px] flex flex-col gap-[25px] w-full'>
       <div className='flex items-center justify-between w-full h-5'>
-        <span className='font-semibold text-lg text-primary'>Scheduled Transfers</span>
-        <Button onClick={handleRoute} variant="ghost" className='text-secondary-color font-semibold text-sm flex items-center gap-1.5 p-0 hover:bg-white hover:text-secondary-color cursor-pointer'>
+        <span className='font-semibold text-base md:text-lg text-primary'>Scheduled Transfers</span>
+        <Button onClick={handleRoute} variant="ghost" className='text-secondary-color font-semibold text-xs md:text-sm flex items-center gap-0 md:gap-1.5 p-0 hover:bg-white hover:text-secondary-color cursor-pointer'>
           View All
           <Image src={'icons/expand.svg'} alt='' width={18} height={18} />
         </Button>
       </div>
 
       <div className='flex flex-col gap-3'>
-        <div className='flex items-center justify-between max-w-[354px] w-full pb-[15px] border-b border-gray1'>
-          <div className='flex items-center gap-[15px]'>
-            <div className='w-[33px] h-[33px] flex-center overflow-hidden rounded-full'>
-              <Image src={'/images/avatar.png'} alt='Avatar' width={33} height={33} />
+        {
+          data && data?.transfers?.length > 0 && data?.transfers?.slice(0, 5)?.map((item) => (
+            <div key={item?.id} className='flex items-center justify-between md:max-w-[354px] w-full pb-[15px] border-b border-gray1'>
+              <div className='flex items-center gap-[15px]'>
+                <div className='w-7 h-7 md:w-[33px] md:h-[33px] flex-center overflow-hidden rounded-full'>
+                  <Image src={item?.image} alt='Avatar' width={33} height={33} unoptimized />
+                </div>
+                <div className='flex flex-col gap-[7px]'>
+                  <span className='font-semibold text-xs md:text-sm text-primary leading-[100%]'>{item?.name}</span>
+                  <span className='font-medium text-[10px] md:text-xs text-secondary leading-[100%]'>{formatDate(item?.date, "long")}</span>
+                </div>
+              </div>
+              <span className='text-xs md:text-base font-semibold text-black'>{formatCurrency(item?.amount, item?.currency)}</span>
             </div>
-            <div className='flex flex-col gap-[7px]'>
-              <span className='font-semibold text-sm text-primary leading-[100%]'>Saleh Ahmed</span>
-              <span className='font-medium text-xs text-secondary leading-[100%]'>April 28, 2022 at 11:00</span>
-            </div>
-          </div>
-          <span className='font-semibold text-black'>- $435,00</span>
-        </div>
-
-        <div className='flex items-center justify-between max-w-[354px] w-full pb-[15px] border-b border-gray1'>
-          <div className='flex items-center gap-[15px]'>
-            <div className='w-[33px] h-[33px] flex-center overflow-hidden rounded-full'>
-              <Image src={'/images/avatar.png'} alt='Avatar' width={33} height={33} />
-            </div>
-            <div className='flex flex-col gap-[7px]'>
-              <span className='font-semibold text-sm text-primary leading-[100%]'>Saleh Ahmed</span>
-              <span className='font-medium text-xs text-secondary leading-[100%]'>April 28, 2022 at 11:00</span>
-            </div>
-          </div>
-          <span className='font-semibold text-black'>- $435,00</span>
-        </div>
-
-        <div className='flex items-center justify-between max-w-[354px] w-full pb-[15px] border-b border-gray1'>
-          <div className='flex items-center gap-[15px]'>
-            <div className='w-[33px] h-[33px] flex-center overflow-hidden rounded-full'>
-              <Image src={'/images/avatar.png'} alt='Avatar' width={33} height={33} />
-            </div>
-            <div className='flex flex-col gap-[7px]'>
-              <span className='font-semibold text-sm text-primary leading-[100%]'>Dr. Jubed Ahmed</span>
-              <span className='font-medium text-xs text-secondary leading-[100%]'>April 28, 2022 at 11:00</span>
-            </div>
-          </div>
-          <span className='font-semibold text-black'>- $826,00</span>
-        </div>
-
-        <div className='flex items-center justify-between max-w-[354px] w-full pb-[15px] border-b border-gray1'>
-          <div className='flex items-center gap-[15px]'>
-            <div className='w-[33px] h-[33px] flex-center overflow-hidden rounded-full'>
-              <Image src={'/images/avatar.png'} alt='Avatar' width={33} height={33} />
-            </div>
-            <div className='flex flex-col gap-[7px]'>
-              <span className='font-semibold text-sm text-primary leading-[100%]'>Moinul Hasan Nayem</span>
-              <span className='font-medium text-xs text-secondary leading-[100%]'>April 28, 2022 at 11:00</span>
-            </div>
-          </div>
-          <span className='font-semibold text-black'>- $132,00</span>
-        </div>
-
-        <div className='flex items-center justify-between max-w-[354px] w-full pb-[15px] border-b border-gray1'>
-          <div className='flex items-center gap-[15px]'>
-            <div className='w-[33px] h-[33px] flex-center overflow-hidden rounded-full'>
-              <Image src={'/images/avatar.png'} alt='Avatar' width={33} height={33} />
-            </div>
-            <div className='flex flex-col gap-[7px]'>
-              <span className='font-semibold text-sm text-primary leading-[100%]'>Saleh Ahmed</span>
-              <span className='font-medium text-xs text-secondary leading-[100%]'>April 28, 2022 at 11:00</span>
-            </div>
-          </div>
-          <span className='font-semibold text-black'>- $435,00</span>
-        </div>
+          ))
+        }
       </div>
     </div>
   )

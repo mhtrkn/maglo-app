@@ -34,6 +34,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
+import { useUserData } from "@/hooks/useUserData";
 import { RefreshCcwIcon } from "lucide-react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -41,14 +42,15 @@ import { usePathname } from "next/navigation"
 function Header() {
   const pathname = usePathname();
   const tabName = pathname.split('/').filter(Boolean).pop();
+  const { user } = useUserData();
 
   return (
-    <div className='w-full flex flex-row items-center max-w-[1110px]'>
-      <h2 className='text-[25px] font-semibold text-primary capitalize'>
+    <div className='w-full flex flex-row items-center md:max-w-[1110px]'>
+      <h2 className='text-base md:text-[25px] font-semibold text-primary capitalize'>
         {tabName}
       </h2>
 
-      <div className='flex-1 w-full flex items-center justify-end gap-[45px]'>
+      <div className='flex-1 w-full flex items-center justify-end gap-2 md:gap-[45px]'>
         <Dialog>
           <DialogTrigger className="cursor-pointer">
             <SearchIcon />
@@ -101,16 +103,21 @@ function Header() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="flex items-center justify-center gap-7 bg-gray1 py-1.5 h-full pl-[7px] pr-[15px] rounded-full">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center gap-1 md:gap-3 md:gap-7 bg-gray1 py-1.5 h-full px-2 md:pl-[7px] md:pr-[15px] rounded-full">
+              <div className="flex items-center gap-0 md:gap-3">
                 <Image src={"/images/profile-photo.png"} alt="" width={36} height={36} />
-                <span className="font-semibold text-sm text-primary">Mahfuzul Nabil</span>
+                <span className="font-semibold text-xs md:text-sm text-primary">
+                  <span className="hidden md:block">
+                    {user?.data?.fullName}
+                  </span>
+                </span>
               </div>
               <Image src={"icons/dropdown.svg"} width={17} height={17} alt="" />
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="start">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuContent className="w-fit md:w-56" align="start">
+            <DropdownMenuLabel className="hidden md:block">{user?.data?.email}</DropdownMenuLabel>
+            <DropdownMenuLabel className="block md:hidden">{user?.data?.fullName}</DropdownMenuLabel>
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 Transactions
