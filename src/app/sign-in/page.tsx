@@ -36,12 +36,9 @@ function SignInPage() {
   const onSubmit = async (data: FormData) => {
     try {
       await login(data);
-      toast.success("Login Successful!", { description: "You are being redirected to your dashboard" });
       router.push(ROUTES.DASHBOARD);
     } catch (err) {
-      toast.error("Login Failed!", {
-        description: "Invalid email or password."
-      });
+      console.log('datdat: ', err);
     }
   };
 

@@ -20,13 +20,13 @@ export const useAuthStore = create<AuthState>((set) => ({
   error: null,
 
   login: async (data: LoginRequest) => {
-    const { show } = useLoadingStore.getState();
+    const { show, hide } = useLoadingStore.getState();
     set({ loading: true, error: null });
     show();
 
     try {
       const res = await authService.login(data);
-      const token = res?.data?.accessToken;
+      const token = res.data.accessToken!;
 
       set({ token, loading: false });
       Cookies.set("token", token, {
@@ -39,6 +39,8 @@ export const useAuthStore = create<AuthState>((set) => ({
     } catch (err) {
       set({ error: 'Error!', loading: false });
       throw err;
+    } finally {
+      hide();
     }
   },
 
