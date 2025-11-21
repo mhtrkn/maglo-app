@@ -154,5 +154,8 @@ npm run dev => localhost:3000
 
 ## Ek açıklama
 ```bash
-(Normalde uygulama geliştirirken API isteklerini SSR taraflı atıp client tarafında sadece datayı render etmeyi tercih ederim. Bu projeye de böyle başladım fakat SSR tarafında API isteği atarken backendin "refresh-token" i zorunlu tutmasından sebep isteklerimi SSR tarafında atamadım. Bu yüzden client tarafında performanstan ödün vermeden yapılabilecek en hızlı en optimize geliştirmeyi tarafınıza sunuyorum.)
+(Normalde uygulama geliştirirken API isteklerini SSR taraflı atıp client tarafında sadece datayı render etmeyi tercih ederim.
+Bu projeye de böyle başladım fakat SSR tarafında API isteği atarken backendin "refresh-token" i zorunlu tutmasından sebep
+API isteklerini SSR tarafında atamadım. Bu yüzden client tarafında performanstan ödün vermeden yapılabilecek en hızlı,
+en optimize geliştirmeyi tarafınıza sunuyorum.)
 ````
