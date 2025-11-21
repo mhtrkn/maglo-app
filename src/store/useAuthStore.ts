@@ -26,7 +26,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     try {
       const res = await authService.login(data);
-      const token = res.data.accessToken!;
+      const token = res?.data?.accessToken || "";
 
       set({ token, loading: false });
       Cookies.set("token", token, {
