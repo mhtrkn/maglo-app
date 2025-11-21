@@ -2,6 +2,7 @@ import { create } from "zustand";
 import Cookies from "js-cookie";
 import { authService } from "@/services/auth";
 import { LoginRequest, LoginResponse } from "@/types/auth";
+import { useLoadingStore } from "./useLoadingStore";
 
 interface AuthState {
   token: string | null;
@@ -19,7 +20,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   error: null,
 
   login: async (data: LoginRequest) => {
+    const { show } = useLoadingStore.getState();
     set({ loading: true, error: null });
+    show();
+
     try {
       const res = await authService.login(data);
       const token = res?.data?.accessToken;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -8,13 +9,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { toast } from "sonner";
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/auth';
 import { ROUTES } from '@/routes';
+import { useAuthStore } from "@/store/useAuthStore";
 
 const schema = yup.object({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -25,30 +27,29 @@ type FormData = yup.InferType<typeof schema>;
 
 function SignInPage() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const { login, loading, error } = useAuthStore();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
+
   const onSubmit = async (data: FormData) => {
-    setLoading(true);
-
     try {
-      const res = await authService.login(data);
-
-      if (res?.success) {
-        toast.success("Login Successful!", { description: "You are being redirected to your dashboard" })
-        router.push(ROUTES.DASHBOARD);
-      }
+      await login(data);
+      toast.success("Login Successful!", { description: "You are being redirected to your dashboard" });
+      router.push(ROUTES.DASHBOARD);
     } catch (err) {
       toast.error("Login Failed!", {
         description: "Invalid email or password."
-      })
-      console.warn(err);
-    } finally {
-      setLoading(false);
+      });
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Login Failed!", { description: error });
+    }
+  }, [error]);
 
   return (
     <div className='w-full flex flex-row min-h-screen'>

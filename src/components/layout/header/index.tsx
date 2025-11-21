@@ -1,23 +1,22 @@
 "use client";
 
 import { NotificationIcon, SearchIcon } from "@/assets/icons";
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   Empty,
   EmptyContent,
@@ -25,27 +24,32 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/empty";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useUserData } from "@/hooks/useUserData";
-import { RefreshCcwIcon } from "lucide-react"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
+import { useUserStore } from "@/store/useUserStore";
+import { RefreshCcwIcon } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 function Header() {
   const pathname = usePathname();
   const tabName = pathname.split('/').filter(Boolean).pop();
-  const { user } = useUserData();
+  const { profile, fetchProfile } = useUserStore();
 
-  if (!user) {
+  useEffect(() => {
+    fetchProfile();
+  }, [fetchProfile]);
+
+  if (!profile) {
     return (
       <div className='w-full flex flex-row items-center'>
         <h2 className='text-base md:text-[25px] font-semibold text-primary capitalize'>
@@ -125,7 +129,7 @@ function Header() {
                 <Image src={"/images/profile-photo.png"} alt="" width={36} height={36} />
                 <span className="font-semibold text-xs md:text-sm text-primary">
                   <span className="hidden md:block">
-                    {user?.data?.fullName}
+                    {profile?.fullName}
                   </span>
                 </span>
               </div>
@@ -133,8 +137,8 @@ function Header() {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-fit md:w-56" align="start">
-            <DropdownMenuLabel className="hidden md:block">{user?.data?.email}</DropdownMenuLabel>
-            <DropdownMenuLabel className="block md:hidden">{user?.data?.fullName}</DropdownMenuLabel>
+            <DropdownMenuLabel className="hidden md:block">{profile?.email}</DropdownMenuLabel>
+            <DropdownMenuLabel className="block md:hidden">{profile?.fullName}</DropdownMenuLabel>
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 Transactions
@@ -149,10 +153,6 @@ function Header() {
                 Settings
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              Log out
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

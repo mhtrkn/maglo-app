@@ -2,6 +2,7 @@
 import { financialService } from "@/services/financial";
 import { FinancialSummary, RecentTransactionsResponse, ScheduledTransfersResponse, WalletResponse, WorkingCapitalResponse } from "@/types/financial";
 import { create } from "zustand";
+import { useLoadingStore } from "./useLoadingStore";
 
 interface FinancialState {
   summary: FinancialSummary | null;
@@ -9,7 +10,6 @@ interface FinancialState {
   wallet: WalletResponse | null;
   recentTransactions: RecentTransactionsResponse | null;
   scheduledTransfers: ScheduledTransfersResponse | null;
-
   loading: boolean;
   error: string | null;
 
@@ -18,6 +18,7 @@ interface FinancialState {
   fetchWallet: () => Promise<void>;
   fetchRecentTransactions: () => Promise<void>;
   fetchScheduledTransfers: () => Promise<void>;
+  fetchAllFinancialData: () => Promise<void>;
   clearFinancialData: () => void;
 }
 
@@ -78,6 +79,28 @@ export const useFinancialStore = create<FinancialState>((set) => ({
       set({ scheduledTransfers: data, loading: false });
     } catch (err) {
       set({ error: "Failed to fetch scheduled transfers", loading: false });
+    }
+  },
+
+  fetchAllFinancialData: async () => {
+    const { show, hide } = useLoadingStore.getState();
+    set({ loading: true, error: null });
+    show();
+
+    try {
+      const [summary, wallet, workingCapital, recentTransactions, scheduledTransfers] = await Promise.all([
+        financialService.getSummary(),
+        financialService.getWallet(),
+        financialService.getWorkingCapital(),
+        financialService.getRecentTransactions(),
+        financialService.getScheduledTransfers(),
+      ]);
+
+      set({ summary, wallet, workingCapital, recentTransactions, scheduledTransfers, loading: false });
+    } catch (err) {
+      set({ error: "Failed to fetch financial data", loading: false });
+    } finally {
+      hide();
     }
   },
 
