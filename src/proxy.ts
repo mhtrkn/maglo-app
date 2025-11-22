@@ -1,4 +1,4 @@
-/* old middleware.ts new proxy.ts */
+import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export default function proxy(request: NextRequest) {
@@ -6,20 +6,16 @@ export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const protectedRoutes = ["/dashboard"];
-  const isProtected = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
+  const authPages = ["/login", "/sign-up"];
 
-  if (isProtected && !token) {
-    return Response.redirect(new URL("/sign-in", request.url));
+  // Korunan sayfalara giriş kontrolü
+  if (protectedRoutes.some(route => pathname.startsWith(route)) && !token) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const authPages = ["/sign-in", "/sign-up"];
-  const isAuthPage = authPages.includes(pathname);
-
-  if (token && isAuthPage) {
-    return Response.redirect(new URL("/dashboard", request.url));
+  if (token && authPages.includes(pathname)) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  return;
+  return NextResponse.next();
 }

@@ -139,7 +139,7 @@ function SignUpPage() {
           <div className='text-secondary text-sm flex self-center'>
             Already have an account?
             <div className='relative ml-1'>
-              <Link href={'/sign-in'} className='text-primary font-medium'>
+              <Link href={ROUTES.LOGIN} className='text-primary font-medium'>
                 Sign in
               </Link>
               <Image className='pt-[7px]' src={'icons/sign-up-marker.svg'} alt='' width={43} height={5} />

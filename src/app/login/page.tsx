@@ -1,22 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from "@/components/ui/spinner";
+import { ROUTES } from '@/routes';
+import { useAuthStore } from "@/store/useAuthStore";
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { toast } from "sonner";
-import { useRouter } from 'next/navigation';
-import { authService } from '@/services/auth';
-import { ROUTES } from '@/routes';
-import { useAuthStore } from "@/store/useAuthStore";
 
 const schema = yup.object({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -27,7 +24,7 @@ type FormData = yup.InferType<typeof schema>;
 
 function SignInPage() {
   const router = useRouter();
-  const { login, loading, error } = useAuthStore();
+  const { login, loading } = useAuthStore();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
@@ -38,15 +35,9 @@ function SignInPage() {
       await login(data);
       router.push(ROUTES.DASHBOARD);
     } catch (err) {
-      console.log('datdat: ', err);
+      console.warn(err)
     }
   };
-
-  useEffect(() => {
-    if (error) {
-      toast.error("Login Failed!", { description: error });
-    }
-  }, [error]);
 
   return (
     <div className='w-full flex flex-row min-h-screen'>

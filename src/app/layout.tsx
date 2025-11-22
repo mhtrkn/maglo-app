@@ -17,10 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={kumbh.variable}>
-      <body>
+      <body className="w-full relative">
         {children}
-        <LottieLoader />
         <Toaster position="top-right" richColors theme="light" />
+        <LottieLoader />
       </body>
     </html>
   );

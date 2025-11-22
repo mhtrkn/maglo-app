@@ -4,6 +4,6 @@ export const ROUTES = {
   INVOICES: '/dashboard/invoices',
   MY_WALLETS: '/dashboard/my-wallets',
   SETTINGS: '/dashboard/settings',
-  SIGN_IN: '/sign-in',
+  LOGIN: '/login',
   SIGN_UP: '/sign-up',
 }

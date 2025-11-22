@@ -34,16 +34,33 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ROUTES } from "@/routes";
 import { useUserStore } from "@/store/useUserStore";
 import { RefreshCcwIcon } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 function Header() {
+  const router = useRouter();
   const pathname = usePathname();
   const tabName = pathname.split('/').filter(Boolean).pop();
   const { profile, fetchProfile } = useUserStore();
+
+  const handleRoute = (id: number) => {
+    switch (id) {
+      case 1:
+        return router.push(ROUTES.TRANSACTIONS);
+      case 2:
+        return router.push(ROUTES.INVOICES);
+      case 3:
+        return router.push(ROUTES.MY_WALLETS);
+      case 4:
+        return router.push(ROUTES.SETTINGS);
+      default:
+        break;
+    }
+  }
 
   useEffect(() => {
     fetchProfile();
@@ -140,16 +157,16 @@ function Header() {
             <DropdownMenuLabel className="hidden md:block">{profile?.email}</DropdownMenuLabel>
             <DropdownMenuLabel className="block md:hidden">{profile?.fullName}</DropdownMenuLabel>
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleRoute(1)}>
                 Transactions
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleRoute(2)}>
                 Invoices
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleRoute(3)}>
                 My Wallets
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleRoute(4)}>
                 Settings
               </DropdownMenuItem>
             </DropdownMenuGroup>

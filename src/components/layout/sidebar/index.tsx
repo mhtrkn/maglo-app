@@ -39,7 +39,7 @@ function Sidebar() {
 
   const handleLogout = async () => {
     await authService.logout();
-    router.push(ROUTES.SIGN_IN);
+    router.push(ROUTES.LOGIN);
   }
   return (
     <div className='max-w-[250px] w-fit md:w-full flex flex-col items-center md:items-start px-1 md:px-[25px] pt-3 md:pt-[30px] md:pb-[100px] bg-gray1'>

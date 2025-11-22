@@ -8,7 +8,6 @@ export const authService = {
   login: async (data: LoginRequest): Promise<LoginResponse> => {
     try {
       const res = await api.post('/users/login', data);
-
       const accessToken = res?.data?.data?.accessToken;
 
       Cookies.set('token', accessToken, {
@@ -23,13 +22,14 @@ export const authService = {
 
       return res.data;
     } catch (error: any) {
-      console.error("Login error:", error);
+      console.log('datdat: ', error);
 
-      const message =
+      const apiMessage =
         error?.response?.data?.message ||
+        error?.response?.data?.error ||
         "Something went wrong while trying to sign in.";
 
-      toast.error("Login failed", { description: message });
+      toast.error("Login failed!", { description: apiMessage });
 
       throw error;
     }
@@ -70,7 +70,7 @@ export const authService = {
         error?.response?.data?.message ||
         "Something went wrong while trying to sign in.";
 
-      toast.error("Login failed", { description: message });
+      toast.error("Registration failed!", { description: message });
     }
   },
 

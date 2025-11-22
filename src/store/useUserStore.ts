@@ -32,8 +32,6 @@ export const useUserStore = create<UserState>((set, get) => ({
         error: "Failed to fetch user profile",
         loading: false,
       });
-    } finally {
-      hide();
     }
   },
 
