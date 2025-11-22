@@ -20,7 +20,7 @@ function MyWalletView({ data }: {
 
   if (!data) {
     return (
-      <div className="flex flex-col max-w-[354px] min-w-[354px] w-full mx-auto">
+      <div className="flex flex-col max-w-[354px] md:min-w-[354px] w-full mx-auto">
         <div className='max-w-[354px] w-full flex items-center justify-between mb-[15px]'>
           <Skeleton className="rounded-full w-15 h-6" />
         </div>
@@ -56,7 +56,7 @@ function MyWalletView({ data }: {
     )
   }
   return (
-    <div className="flex flex-col max-w-[354px] min-w-[354px] w-full mx-auto">
+    <div className="flex flex-col max-w-[354px] md:min-w-[354px] w-full mx-auto">
       <div className='max-w-[354px] w-full flex items-center justify-between mb-[15px]'>
         <span className='font-semibold text-base md:text-lg text-primary'>Wallet</span>
         <DropdownMenu>
@@ -102,7 +102,7 @@ function MyWalletView({ data }: {
 
         {
           data && data?.cards?.length > 1 && (
-            <div className='border border-white/40 rounded-[15px] max-w-[324px] w-full h-[172px] pl-5 pb-5 pt-[15px] -mt-15 relative z-10 backdrop-blur-xs pr-3.5 bg-linear-to-br from-white/10 to-[#f1f2ed]'>
+            <div className='border border-white/40 rounded-[15px] max-w-[354px] w-[calc(100%-30px)] h-[172px] pl-5 pb-5 pt-[15px] -mt-15 relative z-10 backdrop-blur-xs pr-3.5 bg-linear-to-br from-white/10 to-[#f1f2ed]'>
               <div className='w-full flex flex-col gap-[13px] mb-[21px]'>
                 <div className='flex items-center gap-2'>
                   <Image src={'icons/maglo.svg'} alt='Maglo.' width={58} height={23} className="w-[58px] h-[23px]" />

@@ -42,7 +42,7 @@ function Sidebar() {
     router.push(ROUTES.LOGIN);
   }
   return (
-    <div className='max-w-[250px] w-fit md:w-full flex flex-col items-center md:items-start px-1 md:px-[25px] pt-3 md:pt-[30px] md:pb-[100px] bg-gray1'>
+    <div className="flex flex-col bg-gray1 h-screen md:h-auto sticky md:static top-0 md:top-auto max-w-[250px] md:w-full items-center md:items-start px-1 md:px-6 pt-3 md:pt-8 md:pb-24">
       <span className='hidden md:block'>
         <MagloIcon />
       </span>

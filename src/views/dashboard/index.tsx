@@ -30,7 +30,7 @@ function DashboardView() {
         <RecentTransactions data={recentTransactions} />
       </div>
 
-      <div className='flex flex-col flex-wrap w-full max-md:items-center md:w-full max-w-[716px]'>
+      <div className='flex flex-col flex-wrap w-full max-md:items-center md:w-full'>
         <MyWalletView data={wallet} />
         <ScheduledTransfers data={scheduledTransfers} />
       </div>

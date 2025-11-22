@@ -22,14 +22,7 @@ export const authService = {
 
       return res.data;
     } catch (error: any) {
-      console.log('datdat: ', error);
-
-      const apiMessage =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong while trying to sign in.";
-
-      toast.error("Login failed!", { description: apiMessage });
+      toast.error("Login failed!", { description: error?.response?.data?.message });
 
       throw error;
     }
@@ -66,11 +59,7 @@ export const authService = {
 
       return loginRes;
     } catch (error: any) {
-      const message =
-        error?.response?.data?.message ||
-        "Something went wrong while trying to sign in.";
-
-      toast.error("Registration failed!", { description: message });
+      toast.error("Registration failed!", { description: error?.response?.data?.message });
     }
   },
 

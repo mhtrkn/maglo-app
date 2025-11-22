@@ -100,9 +100,7 @@ export const useFinancialStore = create<FinancialState>((set) => ({
     } catch (err) {
       set({ error: "Failed to fetch financial data", loading: false });
     } finally {
-      setTimeout(() => {
-        hide();
-      }, 10000)
+      hide();
     }
   },
 

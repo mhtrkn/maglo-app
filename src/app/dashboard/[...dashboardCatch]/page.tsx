@@ -11,7 +11,7 @@ function NotFoundPage() {
         {`Oops! It seems you've reached a page that doesn't exist.`}
       </span>
 
-      <span className="text-xs md:text-sm text-secondary text-center">
+      <span className="max-sm:max-w-[280px] text-xs md:text-sm text-secondary text-center">
         This page is currently under construction and cannot be viewed at the moment.
         <br />
         You can return to the <Link href="/dashboard" className="text-primary font-medium underline">Dashboard</Link> to continue navigating the platform.

@@ -1,6 +1,6 @@
 "use client";
 
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, useIsMobile } from '@/lib/utils';
 import { FinancialSummary } from '@/types/financial';
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from 'next/image'
@@ -8,8 +8,9 @@ import Image from 'next/image'
 function FinancialSummaryView({ data }: {
   data: FinancialSummary | null
 }) {
+  const isMobile = useIsMobile();
 
-  if (!data) {
+  if (!data && !isMobile) {
     return (
       <div className='flex items-center gap-2 md:gap-[25px] max-md:justify-between max-md:w-full overflow-auto'>
         <div className='max-md:flex-1 bg-[#363A3F] px-2 py-4 md:px-5 md:py-6 flex-center rounded-[10px]'>
