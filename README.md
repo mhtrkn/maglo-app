@@ -1,144 +1,15 @@
-# Maglo App - Next.js Project
+# Maglo App
 
-This is a modern **Next.js 15+** dashboard application built with **React**, **TypeScript**, **TailwindCSS**, **Zustand**, and **ShadCN UI**. The project demonstrates clean state management, reusable components, and advanced frontend patterns.
+Maglo-App, React, TypeScript, TailwindCSS, Zustand ve ShadCN UI kullanılarak geliştirilmiş modern bir Next.js 15+ dashboard uygulamasıdır.
+Proje; temiz state yönetimini, yeniden kullanılabilir bileşenleri ve gelişmiş frontend pattern’larını göstermektedir.
 
 ---
 
-## Live Demo
+## Canlı Demo
+Projenin canlı versiyonunu yanda yer alan linkten inceleyebilirsiniz: [Maglo Dashboard Live](https://magio-app.vercel.app/)
 
-You can view the live version of the project here: [Maglo Dashboard Live](https://magio-app.vercel.app/sign-in)
-
-## .env File
+## .env
 NEXT_PUBLIC_API_BASE_URL=https://case.nodelabs.dev/api/
----
-
-## Features
-
-### 1. Routing & Navigation
-- **App Router** based structure (`src/app/...`) with automatic redirects.
-- `/dashboard` as main page, with sub-routes like `/dashboard/wallet`, `/dashboard/transactions`.
-- Custom handling for `404` pages: non-existent pages redirect to Dashboard or show a custom NotFound page.
-
-### 2. State Management
-- **Zustand** for global state.
-- Separate stores:
-  - `useFinancialStore`: Handles all financial-related API data (summary, wallet, working capital, recent transactions, scheduled transfers).
-  - `useUserStore`: Manages logged-in user profile.
-  - `useAuthStore`: Manages authentication token, login, logout, and refresh.
-  - `useLoadingStore`: Centralized loader management for async calls.
-
-### 3. Hooks
-- `useFinancialData` and `useUserData` initially used for local fetching.
-- Later replaced by Zustand stores for **global state management**, making components independent and reusable.
-- Handles `loading` states and errors with `useLoadingStore` integration.
-
-### 4. API Integration
-- Centralized API service (`/services`) for:
-  - `financialService`
-  - `userService`
-  - `authService`
-- Supports concurrent API calls using `Promise.all` in `fetchAllFinancialData`.
-
-### 5. UI Components
-- Built with **ShadCN UI** components, fully themeable.
-- Supports **Lottie animations** for loaders/modal feedback.
-- Skeleton loaders for table and data fetching states.
-- Responsive layout with **TailwindCSS** breakpoints.
-- Framer Motion animations for page transitions (fade-in, slide, scale effects).
-
-### 6. Authentication
-- **Login Page** integrated with `useAuthStore`.
-- Loading spinners and error feedback integrated via store and `sonner` toast notifications.
-- Global token management with cookies (7-day expiry).
-
-### 7. Error & Fallback Handling
-- Custom **NotFound page** with descriptive messaging and links to return to `/dashboard`.
-- Graceful error handling for all API calls with proper fallback messages.
-
-### 8. Best Practices
-- Separation of concerns:
-  - API logic in `/services`.
-  - UI components isolated in `/components`.
-  - Global state in `/store`.
-  - Page layouts in `/app`.
-- Hooks and stores for async management.
-- Centralized loader and toast system.
-- TypeScript typings for all API responses and stores.
-- Prevents memory leaks using mounted checks in hooks.
-- Custom error handling, avoiding unmounted state updates.
-- Uses `useCallback` in hooks to avoid unnecessary renders.
-
----
-
-## Getting Started
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/mhtrkn/maglo-app.git
-cd maglo-app
-npm install
-npm run dev => localhost:3000
-````
-
-## Türkçe Açıklama
-
-## Özellikler
-
-### 1. Yönlendirme & Navigasyon
-- **App Router** tabanlı yapı (`src/app/...`) ve otomatik yönlendirmeler.
-- `/dashboard` ana sayfa olarak kullanılıyor, alt sayfalar: `/dashboard/wallet`, `/dashboard/transactions`.
-- `404` sayfaları için özel yönetim: bulunmayan sayfalar Dashboard’a yönlendirilir veya özel NotFound sayfası gösterilir.
-
-### 2. State Yönetimi
-- Global state için **Zustand** kullanıldı.
-- Ayrı store’lar:
-  - `useFinancialStore`: Finansal API verilerini (summary, wallet, working capital, recent transactions, scheduled transfers) yönetir.
-  - `useUserStore`: Kullanıcı profilini yönetir.
-  - `useAuthStore`: Auth token, login, logout ve refresh işlemlerini yönetir.
-  - `useLoadingStore`: Async çağrılar için merkezi loader yönetimi sağlar.
-
-### 3. Hooklar
-- Başlangıçta `useFinancialData` ve `useUserData` lokal veri çekimi için kullanıldı.
-- Sonrasında **global state yönetimi** için Zustand store’larıyla değiştirildi; komponentler bağımsız ve tekrar kullanılabilir hale geldi.
-- `loading` durumları ve hatalar `useLoadingStore` ile entegre edildi.
-
-### 4. API Entegrasyonu
-- Merkezi API servisi (`/services`) ile:
-  - `financialService`
-  - `userService`
-  - `authService`
-- `fetchAllFinancialData` ile eş zamanlı API çağrılarını `Promise.all` kullanarak destekler.
-
-### 5. UI Komponentleri
-- **ShadCN UI** ile tamamen tema uyumlu komponentler.
-- **Lottie animasyonları** ile loader/modal görselleştirmesi.
-- Tablo ve veri çekim durumları için skeleton loader’lar.
-- **TailwindCSS** breakpoint’leri ile responsive tasarım.
-- Framer Motion animasyonları (fade-in, slide, scale efektleri).
-
-### 6. Kimlik Doğrulama
-- **Login Sayfası** `useAuthStore` ile entegre.
-- Loader spinner ve toast bildirimleri `sonner` ile store üzerinden yönetiliyor.
-- Global token yönetimi (cookie, 7 gün geçerli).
-
-### 7. Hata & Fallback Yönetimi
-- Özel **NotFound sayfası**, açıklayıcı mesajlar ve `/dashboard`’a dönüş linkleri içerir.
-- Tüm API çağrıları için düzgün fallback mesajları ile hatalar yönetilir.
-
-### 8. En İyi Uygulamalar
-- Sorumlulukların ayrılması:
-  - API mantığı `/services` içinde.
-  - UI komponentleri `/components` içinde.
-  - Global state `/store` içinde.
-  - Sayfa layout’ları `/app` içinde.
-- Async yönetimi için hooklar ve store’lar.
-- Merkezi loader ve toast sistemi.
-- Tüm API cevapları ve store’lar için TypeScript tipleri.
-- Hooklarda mounted check ile memory leak önleme.
-- Unmounted state güncellemelerini önleyen özel hata yönetimi.
-- Gereksiz render’ları önlemek için hooklarda `useCallback` kullanımı.
-
 ---
 
 ## Başlangıç
@@ -152,10 +23,86 @@ npm install
 npm run dev => localhost:3000
 ````
 
-## Ek açıklama
+## Türkçe Açıklama
 ```bash
-(Normalde uygulama geliştirirken API isteklerini SSR taraflı atıp client tarafında sadece datayı render etmeyi tercih ederim.
+Normalde uygulama geliştirirken API isteklerini SSR taraflı atıp client tarafında sadece datayı render etmeyi tercih ederim.
 Bu projeye de böyle başladım fakat SSR tarafında API isteği atarken backendin "refresh-token" i zorunlu tutmasından sebep
-API isteklerini SSR tarafında atamadım. Bu yüzden client tarafında performanstan ödün vermeden yapılabilecek en hızlı,
-en optimize geliştirmeyi tarafınıza sunuyorum.)
+API istekleri kabul görmüyordu. Bu yüzden client tarafında performanstan ödün vermeden yapılabilecek en hızlı,
+en optimize geliştirmeyi tarafınıza sunuyorum. Şimdi sırasıyla neyi neden seçtiğimi anlatayım.
+
+Nextjs: Genelde admin panelleri için reactın daha çok tercih edildiği bir gerçek. Buna rağmen nextjs tercih etme sebebim
+hem genel anlamda nextjs ile proje geliştirirken daha hızlı ve aşina olmamdan sebep (kişisel tercih ve konfor alanı) hemde
+reactta yapması zaman alan bir takım işlemlerin nextjs de aşırı hızlı ve optimize çalışmasından sebep nextjs ile devam ettim.
+
+Zustand: Global state management olarak zustandı tercih ettim çünkü geliştirmiş olduğum proje küçük çaplı bir proje bundan
+sebep optimizasyonu en üst düzeyde tutmak adına projeyi şişirmemek adına zustandı tercih ettim. Hem hiçbir store provider
+gibi işlemlere gerek duymaması hemde kullanım kolaylığı tercih etmemde önemli ölçüde rol aldı. Ek olarak kaldı ki dediğim
+gibi çok büyük çaplı bir proje olmadığından sebep aslında hiç state management kullanmadan bile benzer etkiyi alabilirdik.
+
+Shadcn/UI: Tailwind + Nextjs kombinasyonuna en çok yakışan UI kütüphanelerinden bir tanesi olduğu için tercih ettim.
+Yapacağınız her geliştirmeyi aslında custom component üzerinde yapıyormuşsunuz gibi olması, UX açısından pozitif bir etki
+bırakması ve re-usable yada moduler component-based tabanlı mimariye uyumu ile tercih sebebim oldu.
+
+Vercel: Gerek CI/CD gerekse Nextjs ile olan tek tuş ile deploy etme özelliği.. Gerçekten kendimi geliştirmek adına
+yaptığım tüm projelerde de aktif olarak kullanıyorum.
+
+Yup: Tahmin ediyorum ki form validation işlemlerinde bunu kullanmayan herhalde yoktur. Satırlar süren kodları iki üç
+satırda yapabildiğiniz, okunaklılık ve performans açısından çok üst düzey bir kütüphane bu yüzdende tercih sebebim oldu.
+
+Axios: API isteklerini detaylı ve error handling gibi işlemleri yaparken ki geniş işlem aralığı sebebi ile tercih ettim.
+
+Framer-motion, Recharts, Sonner ve Lottie gibi kütüphaneleri de animasyonları ve UX deneyimini arttırmak için kullandım.
 ````
+
+## Özellikler
+
+### 1. Yönlendirme & Navigasyon
+- **App Router** tabanlı yapı (`src/app/...`) ve otomatik yönlendirmeler.
+- `/dashboard` ana sayfa olarak kullanılıyor, alt sayfalar: `/dashboard/my-wallets`, `/dashboard/transactions`...
+- `404` sayfaları için özel yönetim: bulunmayan sayfalar Dashboard’a yönlendirilir veya özel NotFound sayfası gösterilir.
+
+### 2. State Yönetimi
+- Global state için **Zustand** kullanıldı.
+- Ayrı store’lar:
+  - `useFinancialStore`: Finansal API verilerini (summary, wallet, working capital, recent transactions, scheduled transfers) yönetir.
+  - `useUserStore`: Kullanıcı profilini yönetir.
+  - `useAuthStore`: Auth token, login, logout ve refresh işlemlerini yönetir.
+  - `useLoadingStore`: Async çağrılar için merkezi loader yönetimi sağlar.
+
+### 3. API Entegrasyonu
+- Merkezi API servisi (`/services`) ile:
+  - `financialService`
+  - `userService`
+  - `authService`
+- `fetchAllFinancialData` ile eş zamanlı API çağrılarını `Promise.all` kullanarak destekler.
+
+### 4. UI Komponentleri
+- **ShadCN UI** ile tamamen tema uyumlu komponentler.
+- **Lottie animasyonları** ile loader/modal görselleştirmesi.
+- Tablo ve veri çekim durumları için skeleton loader’lar.
+- **TailwindCSS** breakpoint’leri ile responsive tasarım.
+- Framer Motion animasyonları (fade-in, slide, scale efektleri).
+
+### 5. Kimlik Doğrulama
+- **Login Sayfası** `useAuthStore` ile entegre.
+- Loader spinner ve toast bildirimleri `sonner` ile store üzerinden yönetiliyor.
+- Global token yönetimi (cookie, 7 gün geçerli).
+
+### 6. Hata & Fallback Yönetimi
+- Özel **NotFound sayfası**, açıklayıcı mesajlar ve `/dashboard`’a dönüş linkleri içerir.
+- Tüm API çağrıları için düzgün fallback mesajları ile hatalar yönetilir.
+
+### 7. En İyi Uygulamalar
+- Sorumlulukların ayrılması:
+  - API mantığı `/services` içinde.
+  - UI komponentleri `/components` içinde.
+  - Global state `/store` içinde.
+  - Sayfa layout’ları `/app` içinde.
+- Async yönetimi için hooklar ve store’lar.
+- Merkezi loader ve toast sistemi.
+- Tüm API cevapları ve store’lar için TypeScript tipleri.
+- Hooklarda mounted check ile memory leak önleme.
+- Unmounted state güncellemelerini önleyen özel hata yönetimi.
+- Gereksiz render’ları önlemek için hooklarda `useCallback` kullanımı.
+
+---
